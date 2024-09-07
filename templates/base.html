@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Biodiversidad en Boyacá{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div id="sidebar">
+        <button id="toggle-btn"><i class="fas fa-bars"></i></button>
+        <div class="menu-item">
+            <a href="{{ url_for('home') }}">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="{{ url_for('mapas') }}">
+                <i class="fas fa-map"></i>
+                <span>Mapas</span>
+            </a>
+        </div>
+        <div class="menu-item">
+            <i class="fas fa-cog"></i>
+            <span>Configuración</span>
+        </div>
+    </div>
+    <div id="main-content">
+        {% block content %}{% endblock %}
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/biodiversity_dashboard.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Mapas de Biodiversidad - Boyacá{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+{% endblock %}
+
+{% block content %}
+
+
+<h1>Dashboard de Biodiversidad en Boyacá</h1>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Datos de Biodiversidad</h1>
+    {% for table in tables %}
+        <div class="mb-2">
+            {{ table|safe }}
+        </div>
+    {% endfor %}
+</div>
+
+
+<div class="tabs">
+    <button class="tab active" onclick="updateData('Tunja')">Tunja</button>
+    <button class="tab" onclick="updateData('Duitama')">Duitama</button>
+    <button class="tab" onclick="updateData('Sogamoso')">Sogamoso</button>
+</div>
+<div class="dashboard-container">
+    <div class="dashboard-item" style="background-color: #e8f5e9;">
+        <h2>Resumen de Biodiversidad</h2>
+        <p>Total de especies: <span id="total-species">-</span></p>
+    </div>
+    <div class="dashboard-item" style="background-color: #e3f2fd;">
+        <h2>Top 5 Especies</h2>
+        <ul id="top-species"></ul>
+    </div>
+    <div class="dashboard-item" style="flex-basis: 100%;">
+        <h2>Mapa de Boyacá</h2>
+        <div id="map"></div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initMap();
+        fetchBiodiversityData();
+    });
+</script>
+{% endblock %}
